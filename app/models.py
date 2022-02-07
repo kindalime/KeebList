@@ -5,8 +5,9 @@ class User(AbstractUser):
     pass
 
 class BaseCommonModel(models.Model):
-    name = models.CharField(max_length=255)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    name=models.CharField(max_length=255)
+    notes=models.CharField(max_length=1024)
 
     class Meta:
         abstract = True
@@ -19,30 +20,98 @@ class BaseCommonModel(models.Model):
         return self.name
 
 class CommonModel(BaseCommonModel):
+    present=models.BooleanField()
+    cost=models.FloatField()
+    aftermarket_seller=models.CharField(max_length=255)
+    manufacturer=models.CharField(max_length=255)
+    sell_price=models.FloatField()
+
     class Meta:
         abstract = True
 
 class Keyboard(model.CommonModel):
+    size_choices = [
+        ("Numpad", "Numpad"),
+        ("40%", "40%"),
+        ("60%", "60%"),
+        ("65%", "65%"),
+        ("75%", "75%"),
+        ("TKL", "TKL"),
+        ("1800", "1800"),
+        ("Full", "Full"),
+        ("Other", "Other"),
+    ]
+
+    wkl_choices = [
+        ("Y", "Y"),
+        ("N", "N"),
+        ("N/A", "N/A"),
+    ]
+
+    size=models.CharField(max_length=255, choices=size_choices)
+    color=models.CharField(max_length=255)
+    pcb=models.CharField(max_length=255)
+    plate=models.CharField(max_length=255)
+    wkl=models.CharField(max_length=255, choices="wkl_choices")
+    foam=models.CharField(max_length=255)
+    material=models.CharField(max_length=255)
+    front_height=models.FloatField()
+    typing_angle=models.FloatField()
+    mount=models.CharField(max_length=255)
+    weight=models.CharField(max_length=255)
+    knob=models.CharField(max_length=255)
+    extra_pcbs=models.CharField(max_length=255)
+    extra_plates=models.CharField(max_length=255)
+    extra_accessories=models.CharField(max_length=255)
+
     def get_absolute_url(self):
         return super().get_absolute_url("keyboard")
 
 class Keycap(model.CommonModel):
+    production_choices = [
+        ("Doubleshot", "Doubleshot"),
+        ("Tripleshot", "Tripleshot"),
+        ("Dye-Sublimated", "Dye-Sublimated"),
+        ("Other", "Other"),
+    ]
+
+    profile=models.CharField(max_length=255)
+    sets=models.CharField(max_length=255)
+    material=models.CharField(max_length=255)
+    production=models.CharField(max_length=255, choices=production_choices)
+
     def get_absolute_url(self):
         return super().get_absolute_url("keycap")
 
 class Switch(model.CommonModel):
+    switch_type_choices = [
+        ("Linear", "Linear"),
+        ("Tactile", "Tactile"),
+        ("Clicky", "Clicky"),
+    ]
+
+    switch_type=models.CharField(max_length=255, choices=switch_type_choices)
+    lube=models.CharField(max_length=255)
+    film=models.CharField(max_length=255)
+    actuation_force=models.FloatField()
+    bottom_out_force=models.FloatField()
+    top_material=models.CharField(max_length=255)
+    bottom_material=models.CharField(max_length=255)
+    stem_material=models.CharField(max_length=255)
+    spring_material=models.CharField(max_length=255)
+    spring_length=models.CharField(max_length=255)
+
     class Meta:
         ordering = ['-name']
-        verbose_name_plural = "Switches"
+        verbose_name_plural = "switches"
 
     def get_absolute_url(self):
         return super().get_absolute_url("switch")
 
 class Build(BaseCommonModel):
-    name = models.CharField(max_length=255)
-    keyboard = models.ForeignKey(Keyboard, on_delete=models.CASCADE)
-    keycap = models.ForeignKey(Keycap, on_delete=models.CASCADE)
-    switch = models.ForeignKey(Switch, on_delete=models.CASCADE)
+    keyboard=models.ForeignKey(Keyboard, on_delete=models.CASCADE)
+    keycap=models.ForeignKey(Keycap, on_delete=models.CASCADE)
+    switch=models.ForeignKey(Switch, on_delete=models.CASCADE)
     
     @property
     def present(self):
@@ -58,7 +127,8 @@ class Build(BaseCommonModel):
         return super().get_absolute_url("build")
 
 class Artisan(model.CommonModel):
-    build = models.ForeignKey(Build, on_delete=models.SET_NULL)
+    build=models.ForeignKey(Build, on_delete=models.SET_NULL)
+    profile=models.CharField(max_length=255)
 
     def get_absolute_url(self):
         return super().get_absolute_url("artisan")
@@ -66,7 +136,7 @@ class Artisan(model.CommonModel):
 class Accessory(model.CommonModel):
     class Meta:
         ordering = ['-name']
-        verbose_name_plural = "Accessories"
+        verbose_name_plural = "accessories"
 
     def get_absolute_url(self):
         return super().get_absolute_url("accessory")
