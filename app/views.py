@@ -13,11 +13,11 @@ def get_costs(user=None):
     for model in models:
         if user:
             cost += model.objects.filter(user=user).aggregate(Sum('cost'))
-            gain += model.objects.filter(user=user).aggregate(Sum('sell_price'))
+            gain += model.objects.filter(user=user, status="Sold").aggregate(Sum('sell_price'))
         else:
             cost += model.objects.all().aggregate(Sum('cost'))
-            gain += model.objects.all().aggregate(Sum('sell_price'))
-    return cost, cost - gain        
+            gain += model.objects.filter(status="Sold").aggregate(Sum('sell_price'))
+    return cost, cost - gain
 
 def index(request):
     costs = get_costs()
@@ -65,7 +65,7 @@ class CommonDetailView(CorrectUserMixin, DetailView):
         return super().test_func(super().get_object().user)
 
 class CommonCreateView(LoginRequiredMixin, CreateView):
-    pass
+    pass    
 
 class CommonUpdateView(CorrectUserMixin, UpdateView):
     def test_func(self):
@@ -76,3 +76,93 @@ class CommonDeleteView(CorrectUserMixin, DeleteView):
 
     def test_func(self):
         return super().test_func(super().get_object().user)
+
+class AccessoryListView(CommonListView):
+    pass
+
+class AccessoryDetailView(CommonDetailView):
+    pass
+
+class AccessoryCreateView(CommonCreateView):
+    pass
+
+class AccessoryUpdateView(CommonUpdateView):
+    pass
+
+class AccessoryDeleteView(CommonDeleteView):
+    pass
+
+class ArtisanListView(CommonListView):
+    pass
+
+class ArtisanDetailView(CommonDetailView):
+    pass
+
+class ArtisanCreateView(CommonCreateView):
+    pass
+
+class ArtisanUpdateView(CommonUpdateView):
+    pass
+
+class ArtisanDeleteView(CommonDeleteView):
+    pass
+
+class BuildListView(CommonListView):
+    pass
+
+class BuildDetailView(CommonDetailView):
+    pass
+
+class BuildCreateView(CommonCreateView):
+    pass
+
+class BuildUpdateView(CommonUpdateView):
+    pass
+
+class BuildDeleteView(CommonDeleteView):
+    pass
+
+class KeyboardListView(CommonListView):
+    pass
+
+class KeyboardDetailView(CommonDetailView):
+    pass
+
+class KeyboardCreateView(CommonCreateView):
+    pass
+
+class KeyboardUpdateView(CommonUpdateView):
+    pass
+
+class KeyboardDeleteView(CommonDeleteView):
+    pass
+
+class KeycapListView(CommonListView):
+    pass
+
+class KeycapDetailView(CommonDetailView):
+    pass
+
+class KeycapCreateView(CommonCreateView):
+    pass
+
+class KeycapUpdateView(CommonUpdateView):
+    pass
+
+class KeycapDeleteView(CommonDeleteView):
+    pass
+
+class SwitchListView(CommonListView):
+    pass
+
+class SwitchDetailView(CommonDetailView):
+    pass
+
+class SwitchCreateView(CommonCreateView):
+    pass
+
+class SwitchUpdateView(CommonUpdateView):
+    pass
+
+class SwitchDeleteView(CommonDeleteView):
+    pass
