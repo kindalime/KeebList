@@ -121,10 +121,6 @@ class Build(BaseCommonModel):
     keyboard=models.ForeignKey(Keyboard, on_delete=models.CASCADE)
     keycap=models.ForeignKey(Keycap, on_delete=models.CASCADE)
     switch=models.ForeignKey(Switch, on_delete=models.CASCADE)
-    
-    @property
-    def present(self):
-        return keyboard.status == "Present" and keycap.status == "Present" and switch.status == "Present"
 
     @property
     def cost(self):
