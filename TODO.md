@@ -1,6 +1,6 @@
 BACKEND DONE TODAY!
 * Model plurals
-* Admin form
+* Forms, views, mixins
 * User validation
 * Add in all fields + validation on fields (sold)
 * Button function

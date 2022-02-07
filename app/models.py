@@ -31,6 +31,10 @@ class Keycap(model.CommonModel):
         return super().get_absolute_url("keycap")
 
 class Switch(model.CommonModel):
+    class Meta:
+        ordering = ['-name']
+        verbose_name_plural = "Switches"
+
     def get_absolute_url(self):
         return super().get_absolute_url("switch")
 
@@ -60,5 +64,9 @@ class Artisan(model.CommonModel):
         return super().get_absolute_url("artisan")
 
 class Accessory(model.CommonModel):
+    class Meta:
+        ordering = ['-name']
+        verbose_name_plural = "Accessories"
+
     def get_absolute_url(self):
         return super().get_absolute_url("accessory")
