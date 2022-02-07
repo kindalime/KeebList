@@ -124,13 +124,11 @@ class Build(BaseCommonModel):
     
     @property
     def present(self):
-        pass
-        # return keyboard.present and keycap.present and switch.present
+        return keyboard.status == "Present" and keycap.status == "Present" and switch.status == "Present"
 
     @property
     def cost(self):
-        pass
-        # return 
+        return keyboard.cost + keycap.cost + switch.cost
 
     def get_absolute_url(self):
         return super().get_absolute_url("build")
