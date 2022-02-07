@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic.edit import *
+from django.contrib.auth.mixins import LoginRequiredMixin
 from models import *
 from forms import *
 
@@ -48,3 +51,28 @@ def user(request):
     }
 
     return render(request, 'user.html', context=context)
+
+
+class CorrectUserMixin(LoginRequiredMixin, UserPassesTestMixin):
+    def test_func(self, user):
+        return self.request.user == user
+
+class CommonListView(LoginRequiredMixin, ListView):
+    pass
+
+class CommonDetailView(CorrectUserMixin, DetailView):
+    def test_func(self):
+        return super().test_func(super().get_object().user)
+
+class CommonCreateView(LoginRequiredMixin, CreateView):
+    pass
+
+class CommonUpdateView(CorrectUserMixin, UpdateView):
+    def test_func(self):
+        return super().test_func(super().get_object().user)
+
+class CommonDeleteView(CorrectUserMixin, DeleteView):
+    success_url = reverse_lazy('author-list')
+
+    def test_func(self):
+        return super().test_func(super().get_object().user)
