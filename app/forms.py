@@ -72,7 +72,7 @@ class KeyboardForm(CommonForm):
         ]
         return super().sbadmin_format(Keyboard, data)
 
-class KeycapForm(KeycapForm):
+class KeycapForm(CommonForm):
     class Meta:
         model = Keycap
         exclude = ["user", "id"]
@@ -87,7 +87,7 @@ class KeycapForm(KeycapForm):
         ]
         return super().sbadmin_format(Keycap, data)
 
-class SwitchForm(SwitchForm):
+class SwitchForm(CommonForm):
     class Meta:
         model = Switch
         exclude = ["user", "id"]

@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-    pass
+    email = models.EmailField("email", blank=False)
 
 class BaseCommonModel(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
@@ -38,7 +38,7 @@ class CommonModel(BaseCommonModel):
     class Meta:
         abstract = True
 
-class Keyboard(model.CommonModel):
+class Keyboard(CommonModel):
     size_choices = [
         ("Numpad", "Numpad"),
         ("40%", "40%"),
@@ -61,7 +61,7 @@ class Keyboard(model.CommonModel):
     color=models.CharField(max_length=255)
     pcb=models.CharField(max_length=255)
     plate=models.CharField(max_length=255)
-    wkl=models.CharField(max_length=255, choices="wkl_choices")
+    wkl=models.CharField(max_length=255, choices=wkl_choices)
     foam=models.CharField(max_length=255, blank=True)
     material=models.CharField(max_length=255, blank=True)
     front_height=models.FloatField(null=True, blank=True)
@@ -76,7 +76,7 @@ class Keyboard(model.CommonModel):
     def get_absolute_url(self):
         return super().get_absolute_url("keyboard")
 
-class Keycap(model.CommonModel):
+class Keycap(CommonModel):
     production_choices = [
         ("Doubleshot", "Doubleshot"),
         ("Tripleshot", "Tripleshot"),
@@ -92,7 +92,7 @@ class Keycap(model.CommonModel):
     def get_absolute_url(self):
         return super().get_absolute_url("keycap")
 
-class Switch(model.CommonModel):
+class Switch(CommonModel):
     switch_type_choices = [
         ("Linear", "Linear"),
         ("Tactile", "Tactile"),
@@ -129,14 +129,14 @@ class Build(BaseCommonModel):
     def get_absolute_url(self):
         return super().get_absolute_url("build")
 
-class Artisan(model.CommonModel):
-    build=models.ForeignKey(Build, on_delete=models.SET_NULL)
+class Artisan(CommonModel):
+    build=models.ForeignKey(Build, on_delete=models.SET_NULL, blank=True, null=True)
     profile=models.CharField(max_length=255, blank=True)
 
     def get_absolute_url(self):
         return super().get_absolute_url("artisan")
 
-class Accessory(model.CommonModel):
+class Accessory(CommonModel):
     class Meta:
         ordering = ['-name']
         verbose_name_plural = "accessories"

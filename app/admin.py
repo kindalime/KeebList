@@ -4,7 +4,7 @@ from .models import *
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = [field.name for field in User._meta.get_fields()]
+    list_display = ["username", "email"]
 
 @admin.register(Accessory)
 class AccessoryAdmin(admin.ModelAdmin):
