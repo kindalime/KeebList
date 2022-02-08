@@ -53,6 +53,11 @@ def user(request):
 
     return render(request, 'user.html', context=context)
 
+class SignUpView(SuccessMessageMixin, CreateView):
+    template_name = 'users/register.html'
+    success_url = reverse_lazy('login')
+    form_class = CustomUserCreationForm
+    success_message = "Your profile was created successfully"
 
 class CorrectUserMixin(LoginRequiredMixin, UserPassesTestMixin):
     def test_func(self, user):

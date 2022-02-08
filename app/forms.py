@@ -1,5 +1,13 @@
 from django import forms
 from .models import *
+from django.contrib.auth.forms import UserCreationForm
+
+class CustomUserCreationForm(UserCreationForm):
+  email = forms.EmailField()
+
+  class Meta:
+      model = User
+      fields = ['username', 'email']
 
 class CommonForm(forms.ModelForm):
     def sbadmin_format(self, model, data):
