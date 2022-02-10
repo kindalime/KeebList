@@ -119,9 +119,9 @@ class Switch(CommonModel):
         return super().get_absolute_url("switch")
 
 class Build(BaseCommonModel):
-    keyboard=models.ForeignKey(Keyboard, on_delete=models.CASCADE)
-    keycap=models.ForeignKey(Keycap, on_delete=models.CASCADE)
-    switch=models.ForeignKey(Switch, on_delete=models.CASCADE)
+    keyboard=models.OneToOneField(Keyboard, on_delete=models.CASCADE)
+    keycap=models.OneToOneField(Keycap, on_delete=models.CASCADE)
+    switch=models.OneToOneField(Switch, on_delete=models.CASCADE)
 
     @property
     def cost(self):
