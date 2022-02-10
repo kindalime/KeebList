@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Builds {% endblock %}
+
+{% block container_fluid %}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Build</h1>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <col style="width:25%">
+                    <tbody>
+                        {% for item in data %}
+                            {% if item.2 %}
+                            <tr>
+                                <th>{{ item.0 }}</th>
+                                <td><a href="{{ item.1.get_absolute_url }}">{{ item.1.name }}</a></td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <th>{{ item.0 }}</th>
+                                <td>{{ item.1 }}</td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <a href="{% url 'build-update' build.id %}" class="btn btn-primary btn-user btn-block">Update</a>
+            <a href="{% url 'build-delete' build.id %}" class="btn btn-danger btn-user btn-block">Delete</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

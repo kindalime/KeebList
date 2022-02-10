@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Keyboards {% endblock %}
+
+{% block container_fluid %}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Keyboards</h1>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <col style="width:10%">
+                    <thead>
+                        <tr>
+                            <th>Page</th>
+                            <th>Name</th>
+                            <th>Size</th>
+                            <th>Color</th>
+                            <th>PCB</th>
+                            <th>Plate</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Page</th>
+                            <th>Name</th>
+                            <th>Size</th>
+                            <th>Color</th>
+                            <th>PCB</th>
+                            <th>Plate</th>
+                            <th>Cost</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for keyboard in object_list %}
+                        <tr>
+                            <td><a href="{{ keyboard.get_absolute_url }}" class="btn btn-primary btn-user btn-block">Page</a></td>
+                            <td>{{ keyboard.name }}</td>
+                            <td>{{ keyboard.size }}</td>
+                            <td>{{ keyboard.color }}</td>
+                            <td>{{ keyboard.pcb }}</td>
+                            <td>{{ keyboard.plate }}</td>
+                            <td>{{ keyboard.cost }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <a href="{% url 'keyboard-create' %}" class="btn btn-primary btn-user btn-block">New Keyboard</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

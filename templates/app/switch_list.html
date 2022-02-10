@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Switches {% endblock %}
+
+{% block container_fluid %}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Switches</h1>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <col style="width:10%">
+                    <thead>
+                        <tr>
+                            <th>Page</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Bottom-Out Force</th>
+                            <th>Cost</th>
+                            <th>Manufacturer</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Page</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Bottom-Out Force</th>
+                            <th>Cost</th>
+                            <th>Manufacturer</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for switch in object_list %}
+                        <tr>
+                            <td><a href="{{ switch.get_absolute_url }}" class="btn btn-primary btn-user btn-block">Page</a></td>
+                            <td>{{ switch.name }}</td>
+                            <td>{{ switch.type }}</td>
+                            <td>{{ switch.bottom_out_force }}</td>
+                            <td>{{ switch.cost }}</td>
+                            <td>{{ switch.manufacturer }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <a href="{% url 'switch-create' %}" class="btn btn-primary btn-user btn-block">New Switch</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

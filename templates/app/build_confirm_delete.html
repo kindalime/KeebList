@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Build {% endblock %}
+
+{% block container_fluid %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col-lg-8 offset-lg-2">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-2">Delete Build</h1>
+                                    <p class="mb-4">Are you sure you want to delete build {{build.name}}?</p>
+                                </div>
+                                <form method="post" action="">
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn btn-danger btn-user btn-block" value="Delete"/>
+                                </form>
+                                <hr>
+                                <div class="text-center">
+                                    <a href="{% url 'index' %}">&larr; Back to Dashboard</a>
+                                </div>
+                                <div class="text-center">
+                                    <a href="{% url 'build' %}">&larr; Back to Builds</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Keycaps {% endblock %}
+
+{% block container_fluid %}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Keycaps</h1>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <col style="width:10%">
+                    <thead>
+                        <tr>
+                            <th>Page</th>
+                            <th>Name</th>
+                            <th>Profile</th>
+                            <th>Sets</th>
+                            <th>Material</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Page</th>
+                            <th>Name</th>
+                            <th>Profile</th>
+                            <th>Sets</th>
+                            <th>Material</th>
+                            <th>Cost</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for keycap in object_list %}
+                        <tr>
+                            <td><a href="{{ keycap.get_absolute_url }}" class="btn btn-primary btn-user btn-block">Page</a></td>
+                            <td>{{ keycap.name }}</td>
+                            <td>{{ keycap.profile }}</td>
+                            <td>{{ keycap.sets }}</td>
+                            <td>{{ keycap.material }}</td>
+                            <td>{{ keycap.cost }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <a href="{% url 'keycap-create' %}" class="btn btn-primary btn-user btn-block">New Keycap</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

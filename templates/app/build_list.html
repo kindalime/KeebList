@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Builds {% endblock %}
+
+{% block container_fluid %}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Builds</h1>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <col style="width:10%">
+                    <thead>
+                        <tr>
+                            <th>Page</th>
+                            <th>Name</th>
+                            <th>Keyboard</th>
+                            <th>Keycap</th>
+                            <th>Switch</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Page</th>
+                            <th>Name</th>
+                            <th>Keyboard</th>
+                            <th>Keycap</th>
+                            <th>Switch</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for build in object_list %}
+                        <tr>
+                            <td><a href="{{ build.get_absolute_url }}" class="btn btn-primary btn-user btn-block">Page</a></td>
+                            <td>{{ build.name }}</td>
+                            <td><a href="{{ build.keyboard.get_absolute_url }}" >{{ build.keyboard.name }}</a></td>
+                            <td><a href="{{ build.keycap.get_absolute_url }}" >{{ build.keycap.name }}</a></td>
+                            <td><a href="{{ build.switch.get_absolute_url }}" >{{ build.switch.name }}</a></td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <a href="{% url 'build-create' %}" class="btn btn-primary btn-user btn-block">New Build</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

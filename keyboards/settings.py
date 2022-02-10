@@ -55,7 +55,11 @@ ROOT_URLCONF = 'keyboards.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [str(BASE_DIR.joinpath('templates'))],
+        'DIRS': [
+            str(BASE_DIR.joinpath('templates')),
+            str(BASE_DIR.joinpath('templates/registration')),
+            str(BASE_DIR.joinpath('templates/theme')),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,11 +122,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
 STATICFILES_DIRS = (str(BASE_DIR.joinpath('static')),)
 
-STATIC_ROOT = '/static_root/'
+STATIC_ROOT = 'static_root/'
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
@@ -133,8 +137,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'app.User'
 
-LOGIN_REDIRECT_URL = '/user/'
+LOGIN_REDIRECT_URL = '/app/user/'
 
 LOGOUT_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {"class": "logging.StreamHandler"},
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": "INFO",
+        },
+    }
+}
+

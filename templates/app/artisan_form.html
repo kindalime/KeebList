@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Artisan {% endblock %}
+
+{% block container_fluid %}
+<div class="container_fluid">
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col-lg-8 offset-lg-2">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Artisan</h1>
+                                </div>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    {% for row in form.sbadmin_format %}
+                                    <div class="form-group row">
+                                        {% for item in row %}
+                                            {% if item.3 == "select" %}
+                                                <div class="col-sm-{{item.2}}">
+                                                    <label for="{{item.1}}">{{item.4}}</label>
+                                                    <select class="form-control form-control-user" id="{{item.1}}" name="{{item.1}}">
+                                                        {% for choice in item.5.choices %}
+                                                            {% if choice.0 == item.0.value %}
+                                                                <option value="{{ choice.0 }}" selected>{{ choice.1 }}</option>
+                                                            {% else %}
+                                                                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </select>
+                                                    <p style="color:red; size:100%; padding:0">{{ item.0.errors.as_text }} &nbsp;</p>
+                                                </div>
+                                            {% else %}
+                                                <div class="col-sm-{{item.2}}">
+                                                    <label for="{{item.1}}">{{item.4}}</label>
+                                                    <input type="{{item.3}}" class="form-control form-control-user" id="{{item.1}}" name="{{item.1}}" value="{{item.0.value}}">
+                                                    <p style="color:red; size:100%; padding:0">{{ item.0.errors.as_text }} &nbsp;</p>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    {% endfor %}
+                                    <p style="color:red; size:100%; padding:0">{{ form.non_field_errors }} &nbsp;</p>
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">Submit</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
