@@ -49,14 +49,14 @@ class ArtisanForm(CommonForm):
         ]
         return super().sbadmin_format(Artisan, data)
 
-class BuildForm(forms.ModelForm):
+class BuildForm(CommonForm):
     class Meta:
         model = Build
         exclude = ["user", "id"]
 
     def sbadmin_format(self):
         data = [
-            [["name", 6, "text"], ["cost", 6, "number"]],
+            [["name", 12, "text"],],
             [["keyboard", 4, "select"], ["keycap", 4, "select"], ["switch", 4, "select"]],
             [["notes", 12, "text"]],
         ]
@@ -71,8 +71,8 @@ class KeyboardForm(CommonForm):
         data = [
             [["name", 4, "text"], ["status", 4, "select"], ["cost", 4, "number"]],
             [["sell_price", 4, "number"], ["aftermarket_seller", 4, "text"], ["manufacturer", 4, "text"]],
-            [["size", 4, "select"], ["wkl", 4, "select"], ["color", 4, "text"]],
-            [["pcb", 4, "text"], ["plate", 4, "text"], ["foam", 4, "text"]],    
+            [["size", 4, "select"], ["wkl", 4, "select", "WKL"], ["color", 4, "text"]],
+            [["pcb", 4, "text", "Current PCB"], ["plate", 4, "text"], ["foam", 4, "text"]],    
             [["material", 4, "text"], ["mount", 4, "text"], ["weight", 4, "text"]],
             [["front_height", 4, "number"], ["typing_angle", 4, "number"], ["knob", 4, "text"]],
             [["extra_pcbs", 6, "text"], ["extra_plates", 6, "text"]],
@@ -89,8 +89,8 @@ class KeycapForm(CommonForm):
     def sbadmin_format(self):
         data = [
             [["name", 4, "text"], ["status", 4, "select"], ["cost", 4, "number"]],
-            [["sell_price", 4, "number"], ["build", 4, "select"], ["profile", 4, "text"]],            
-            [["production", 4, "select"], ["material", 4, "text"], ["aftermarket_seller", 4, "text"]],
+            [["sell_price", 4, "number"], ["aftermarket_seller", 4, "text"], ["profile", 4, "text"]],            
+            [["production", 6, "select"], ["material", 6, "text"]],
             [["sets", 6, "text"], ["manufacturer", 6, "text"]],
             [["notes", 12, "text"]],
         ]
@@ -104,11 +104,11 @@ class SwitchForm(CommonForm):
     def sbadmin_format(self):
         data = [
             [["name", 4, "text"], ["status", 4, "select"], ["cost", 4, "number"]],
+            [["sell_price", 4, "number"], ["aftermarket_seller", 4, "text"], ["manufacturer", 4, "text"]],            
             [["switch_type", 4, "select"], ["lube", 4, "text"], ["film", 4, "text"]],
-            [["actuation_force", 4, "number", "Actuation Force (g)"], ["bottom_out_force", 4, "text", "Bottom-Out Force (g)"], ["spring_length", 4, "text"]],
+            [["actuation_force", 4, "number", "Actuation Force (g)"], ["bottom_out_force", 4, "number", "Bottom-Out Force (g)"], ["spring_length", 4, "text"]],
             [["top_material", 6, "text"], ["bottom_material", 6, "text"]],
             [["stem_material", 6, "text"], ["spring_material", 6, "text"]],
-            [["sets", 6, "text"], ["manufacturer", 6, "text"]],
             [["notes", 12, "text"]],
         ]
         return super().sbadmin_format(Switch, data)
