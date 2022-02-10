@@ -77,6 +77,24 @@ class CommonDetailView(CorrectUserMixin, DetailView):
     def test_func(self):
         return super().test_func(super().get_object().user)
 
+    def get_context_data(self, model, **kwargs):
+        context = super().get_context_data(**kwargs)
+        obj = super().get_object()
+        data = []
+
+        for field in model._meta.fields:
+            if field.name in ["id", "user"]:
+                continue
+
+            name = field.name.replace("_", " ").title()
+            value = getattr(obj, field.name)
+            if value != 0 and not value:
+                value = ""
+            data.append([name, value, hasattr(value, "get_absolute_url")])
+
+        context['data'] = data
+        return context
+
 class CommonCreateView(LoginRequiredMixin, CreateView):
     def get_initial(self, request, model):
         initial = dict()
@@ -107,13 +125,20 @@ class AccessoryListView(CommonListView):
 
 class AccessoryDetailView(CommonDetailView):
     model = Accessory
+    
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(Accessory, **kwargs)
 
 class AccessoryCreateView(CommonCreateView):
     model = Accessory
-    fields = "__all__"
+    form_class = AccessoryForm
+
+    def get_initial(self):
+        return super().get_initial(self.request, Accessory)
 
 class AccessoryUpdateView(CommonUpdateView):
     model = Accessory
+    form_class = AccessoryForm
 
 class AccessoryDeleteView(CommonDeleteView):
     model = Accessory
@@ -129,6 +154,9 @@ class ArtisanListView(CommonListView):
 
 class ArtisanDetailView(CommonDetailView):
     model = Artisan
+    
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(Artisan, **kwargs)
 
 class ArtisanCreateView(CommonCreateView):
     model = Artisan
@@ -139,67 +167,124 @@ class ArtisanCreateView(CommonCreateView):
 
 class ArtisanUpdateView(CommonUpdateView):
     model = Artisan
+    form_class = ArtisanForm
 
 class ArtisanDeleteView(CommonDeleteView):
     model = Artisan
     success_url = reverse_lazy('artisan')
 
 class BuildListView(CommonListView):
-    pass
+    model = Build
+    template_name = 'models/build_list.html'
+    context_object_name = 'build_list'
+
+    def get_queryset(self):
+        return Build.objects.filter(user=self.request.user)
 
 class BuildDetailView(CommonDetailView):
-    pass
+    model = Build
+    
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(Build, **kwargs)
 
 class BuildCreateView(CommonCreateView):
-    pass
+    model = Build
+    form_class = BuildForm
+
+    def get_initial(self):
+        return super().get_initial(self.request, Build)
 
 class BuildUpdateView(CommonUpdateView):
-    pass
+    model = Build
+    form_class = BuildForm
 
 class BuildDeleteView(CommonDeleteView):
-    pass
+    model = Build
+    success_url = reverse_lazy('build')
 
 class KeyboardListView(CommonListView):
-    pass
+    model = Keyboard
+    template_name = 'models/keyboard_list.html'
+    context_object_name = 'keyboard_list'
+
+    def get_queryset(self):
+        return super().get_queryset(Keyboard, self.request.user)
 
 class KeyboardDetailView(CommonDetailView):
-    pass
+    model = Keyboard
+    
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(Keyboard, **kwargs)
 
 class KeyboardCreateView(CommonCreateView):
-    pass
+    model = Keyboard
+    form_class = KeyboardForm
+
+    def get_initial(self):
+        return super().get_initial(self.request, Keyboard)
 
 class KeyboardUpdateView(CommonUpdateView):
-    pass
+    model = Keyboard
+    form_class = KeyboardForm
 
 class KeyboardDeleteView(CommonDeleteView):
-    pass
+    model = Keyboard
+    success_url = reverse_lazy('keyboard')
 
 class KeycapListView(CommonListView):
-    pass
+    model = Keycap
+    template_name = 'models/keycap_list.html'
+    context_object_name = 'keycap_list'
+
+    def get_queryset(self):
+        return super().get_queryset(Keycap, self.request.user)
 
 class KeycapDetailView(CommonDetailView):
-    pass
+    model = Keycap
+    
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(Keycap, **kwargs)
 
 class KeycapCreateView(CommonCreateView):
-    pass
+    model = Keycap
+    form_class = KeycapForm
+
+    def get_initial(self):
+        return super().get_initial(self.request, Keycap)
 
 class KeycapUpdateView(CommonUpdateView):
-    pass
+    model = Keycap
+    form_class = KeycapForm
 
 class KeycapDeleteView(CommonDeleteView):
-    pass
+    model = Keycap
+    success_url = reverse_lazy('keycap')
 
 class SwitchListView(CommonListView):
-    pass
+    model = Switch
+    template_name = 'models/switch_list.html'
+    context_object_name = 'switch_list'
+
+    def get_queryset(self):
+        return super().get_queryset(Switch, self.request.user)
 
 class SwitchDetailView(CommonDetailView):
-    pass
+    model = Switch
+    
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(Switch, **kwargs)
 
 class SwitchCreateView(CommonCreateView):
-    pass
+    model = Switch
+    form_class = SwitchForm
+
+    def get_initial(self):
+        return super().get_initial(self.request, Switch)
 
 class SwitchUpdateView(CommonUpdateView):
-    pass
+    model = Switch
+    form_class = SwitchForm
 
 class SwitchDeleteView(CommonDeleteView):
-    pass
+    model = Switch
+    success_url = reverse_lazy('switch')
