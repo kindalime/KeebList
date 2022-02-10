@@ -29,8 +29,8 @@
                     </tbody>
                 </table>
             </div>
-            <a href="{% url 'switch-update' switch.id %}" class="btn btn-primary btn-user btn-block">Update</a>
-            <a href="{% url 'switch-delete' switch.id %}" class="btn btn-danger btn-user btn-block">Delete</a>
+            <a href="{% url 'switch-update' switch.slug %}" class="btn btn-primary btn-user btn-block">Update</a>
+            <a href="{% url 'switch-delete' switch.slug %}" class="btn btn-danger btn-user btn-block">Delete</a>
         </div>
     </div>
 </div>

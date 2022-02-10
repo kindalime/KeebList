@@ -25,7 +25,7 @@ class CommonForm(forms.ModelForm):
 class AccessoryForm(CommonForm):
     class Meta:
         model = Accessory
-        exclude = ["user", "id"]
+        exclude = ["user", "id", "slug"]
 
     def sbadmin_format(self):
         data = [
@@ -38,7 +38,7 @@ class AccessoryForm(CommonForm):
 class ArtisanForm(CommonForm):
     class Meta:
         model = Artisan
-        exclude = ["user", "id"]
+        exclude = ["user", "id", "slug"]
     
     def sbadmin_format(self):
         data = [
@@ -52,7 +52,7 @@ class ArtisanForm(CommonForm):
 class BuildForm(CommonForm):
     class Meta:
         model = Build
-        exclude = ["user", "id"]
+        exclude = ["user", "id", "slug"]
 
     def sbadmin_format(self):
         data = [
@@ -65,7 +65,7 @@ class BuildForm(CommonForm):
 class KeyboardForm(CommonForm):
     class Meta:
         model = Keyboard
-        exclude = ["user", "id"]
+        exclude = ["user", "id", "slug"]
 
     def sbadmin_format(self):
         data = [
@@ -84,7 +84,7 @@ class KeyboardForm(CommonForm):
 class KeycapForm(CommonForm):
     class Meta:
         model = Keycap
-        exclude = ["user", "id"]
+        exclude = ["user", "id", "slug"]
 
     def sbadmin_format(self):
         data = [
@@ -99,7 +99,7 @@ class KeycapForm(CommonForm):
 class SwitchForm(CommonForm):
     class Meta:
         model = Switch
-        exclude = ["user", "id"]
+        exclude = ["user", "id", "slug"]
 
     def sbadmin_format(self):
         data = [

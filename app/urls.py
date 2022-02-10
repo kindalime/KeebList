@@ -9,48 +9,48 @@ urlpatterns = [
 
 urlpatterns += [
     path('accessory/', AccessoryListView.as_view(), name='accessory'),
-    path('accessory/<int:pk>', AccessoryDetailView.as_view(), name='accessory-detail'),
+    path('accessory/<slug:slug>', AccessoryDetailView.as_view(), name='accessory-detail'),
     path('accessory/create/', AccessoryCreateView.as_view(), name='accessory-create'),
-    path('accessory/<int:pk>/update/', AccessoryUpdateView.as_view(), name='accessory-update'),
-    path('accessory/<int:pk>/delete/', AccessoryDeleteView.as_view(), name='accessory-delete'),
+    path('accessory/<slug:slug>/update/', AccessoryUpdateView.as_view(), name='accessory-update'),
+    path('accessory/<slug:slug>/delete/', AccessoryDeleteView.as_view(), name='accessory-delete'),
 ]
 
 urlpatterns += [
     path('artisan/', ArtisanListView.as_view(), name='artisan'),
-    path('artisan/<int:pk>', ArtisanDetailView.as_view(), name='artisan-detail'),
+    path('artisan/<slug:slug>', ArtisanDetailView.as_view(), name='artisan-detail'),
     path('artisan/create/', ArtisanCreateView.as_view(), name='artisan-create'),
-    path('artisan/<int:pk>/update/', ArtisanUpdateView.as_view(), name='artisan-update'),
-    path('artisan/<int:pk>/delete/', ArtisanDeleteView.as_view(), name='artisan-delete'),
+    path('artisan/<slug:slug>/update/', ArtisanUpdateView.as_view(), name='artisan-update'),
+    path('artisan/<slug:slug>/delete/', ArtisanDeleteView.as_view(), name='artisan-delete'),
 ]
 
 urlpatterns += [
     path('build/', BuildListView.as_view(), name='build'),
-    path('build/<int:pk>', BuildDetailView.as_view(), name='build-detail'),
+    path('build/<slug:slug>', BuildDetailView.as_view(), name='build-detail'),
     path('build/create/', BuildCreateView.as_view(), name='build-create'),
-    path('build/<int:pk>/update/', BuildUpdateView.as_view(), name='build-update'),
-    path('build/<int:pk>/delete/', BuildDeleteView.as_view(), name='build-delete'),
+    path('build/<slug:slug>/update/', BuildUpdateView.as_view(), name='build-update'),
+    path('build/<slug:slug>/delete/', BuildDeleteView.as_view(), name='build-delete'),
 ]
 
 urlpatterns += [
     path('keycap/', KeycapListView.as_view(), name='keycap'),
-    path('keycap/<int:pk>', KeycapDetailView.as_view(), name='keycap-detail'),
+    path('keycap/<slug:slug>', KeycapDetailView.as_view(), name='keycap-detail'),
     path('keycap/create/', KeycapCreateView.as_view(), name='keycap-create'),
-    path('keycap/<int:pk>/update/', KeycapUpdateView.as_view(), name='keycap-update'),
-    path('keycap/<int:pk>/delete/', KeycapDeleteView.as_view(), name='keycap-delete'),
+    path('keycap/<slug:slug>/update/', KeycapUpdateView.as_view(), name='keycap-update'),
+    path('keycap/<slug:slug>/delete/', KeycapDeleteView.as_view(), name='keycap-delete'),
 ]
 
 urlpatterns += [
     path('keyboard/', KeyboardListView.as_view(), name='keyboard'),
-    path('keyboard/<int:pk>', KeyboardDetailView.as_view(), name='keyboard-detail'),
+    path('keyboard/<slug:slug>', KeyboardDetailView.as_view(), name='keyboard-detail'),
     path('keyboard/create/', KeyboardCreateView.as_view(), name='keyboard-create'),
-    path('keyboard/<int:pk>/update/', KeyboardUpdateView.as_view(), name='keyboard-update'),
-    path('keyboard/<int:pk>/delete/', KeyboardDeleteView.as_view(), name='keyboard-delete'),
+    path('keyboard/<slug:slug>/update/', KeyboardUpdateView.as_view(), name='keyboard-update'),
+    path('keyboard/<slug:slug>/delete/', KeyboardDeleteView.as_view(), name='keyboard-delete'),
 ]
 
 urlpatterns += [
     path('switch/', SwitchListView.as_view(), name='switch'),
-    path('switch/<int:pk>', SwitchDetailView.as_view(), name='switch-detail'),
+    path('switch/<slug:slug>', SwitchDetailView.as_view(), name='switch-detail'),
     path('switch/create/', SwitchCreateView.as_view(), name='switch-create'),
-    path('switch/<int:pk>/update/', SwitchUpdateView.as_view(), name='switch-update'),
-    path('switch/<int:pk>/delete/', SwitchDeleteView.as_view(), name='switch-delete'),
+    path('switch/<slug:slug>/update/', SwitchUpdateView.as_view(), name='switch-update'),
+    path('switch/<slug:slug>/delete/', SwitchDeleteView.as_view(), name='switch-delete'),
 ]

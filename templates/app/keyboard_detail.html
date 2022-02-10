@@ -29,8 +29,8 @@
                     </tbody>
                 </table>
             </div>
-            <a href="{% url 'keyboard-update' keyboard.id %}" class="btn btn-primary btn-user btn-block">Update</a>
-            <a href="{% url 'keyboard-delete' keyboard.id %}" class="btn btn-danger btn-user btn-block">Delete</a>
+            <a href="{% url 'keyboard-update' keyboard.slug %}" class="btn btn-primary btn-user btn-block">Update</a>
+            <a href="{% url 'keyboard-delete' keyboard.slug %}" class="btn btn-danger btn-user btn-block">Delete</a>
         </div>
     </div>
 </div>

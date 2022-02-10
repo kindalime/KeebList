@@ -83,7 +83,7 @@ class CommonDetailView(CorrectUserMixin, DetailView):
         data = []
 
         for field in model._meta.fields:
-            if field.name in ["id", "user"]:
+            if field.name in ["id", "user", "slug"]:
                 continue
 
             name = field.name.replace("_", " ").title()

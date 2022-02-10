@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.crypto import get_random_string
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
@@ -9,13 +10,14 @@ class BaseCommonModel(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     name=models.CharField(max_length=255)
     notes=models.CharField(max_length=1024, blank=True)
+    slug=models.SlugField(max_length=255, null=False, unique=True, default=get_random_string(10))
 
     class Meta:
         abstract = True
         ordering = ['-name']
 
     def get_absolute_url(self, model):
-        return reverse(f'{model}-detail', args=[str(self.id)])
+        return reverse(f'{model}-detail', kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.name

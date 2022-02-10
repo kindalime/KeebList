@@ -29,8 +29,8 @@
                     </tbody>
                 </table>
             </div>
-            <a href="{% url 'accessory-update' accessory.id %}" class="btn btn-primary btn-user btn-block">Update</a>
-            <a href="{% url 'accessory-delete' accessory.id %}" class="btn btn-danger btn-user btn-block">Delete</a>
+            <a href="{% url 'accessory-update' accessory.slug %}" class="btn btn-primary btn-user btn-block">Update</a>
+            <a href="{% url 'accessory-delete' accessory.slug %}" class="btn btn-danger btn-user btn-block">Delete</a>
         </div>
     </div>
 </div>
