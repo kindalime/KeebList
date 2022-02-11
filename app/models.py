@@ -7,10 +7,10 @@ class User(AbstractUser):
     email = models.EmailField("email", blank=False)
 
 class BaseCommonModel(models.Model):
+    slug=models.SlugField(max_length=255, null=False, unique=True, default=get_random_string(10))
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     name=models.CharField(max_length=255)
     notes=models.CharField(max_length=1024, blank=True)
-    slug=models.SlugField(max_length=255, null=False, unique=True, default=get_random_string(10))
 
     class Meta:
         abstract = True

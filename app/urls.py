@@ -5,6 +5,7 @@ urlpatterns = [
     path('', index, name='index'),
     path('user/', user, name='user'),
     path('signup/', SignUpView.as_view(), name='signup'),
+    path('user/report/', report, name="report")
 ]
 
 urlpatterns += [

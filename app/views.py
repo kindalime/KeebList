@@ -1,12 +1,16 @@
-from django.db.models import Q
+from django.db import models
+from django.db.models import Q, Sum
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.edit import *
 from django.views.generic import *
-from django.db.models import Sum
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.http import HttpResponse
 from .models import *
 from .forms import *
+import zipfile
+import shutil
+import os, io
 
 def get_costs(user=None):
     models = [Artisan, Accessory, Keyboard, Keycap, Switch]
@@ -59,6 +63,50 @@ def user(request):
     }
 
     return render(request, 'user.html', context=context)
+
+def report(request):
+    model_list = [Artisan, Accessory, Build, Keyboard, Keycap, Switch]
+    user = request.user
+    os.mkdir("report")
+
+    for model in model_list:
+        objects = model.objects.filter(user=user)
+        fields = []
+
+        for field in model._meta.fields:
+            if field.name not in ["id", "user"]:
+                fields.append(field.name)
+                if isinstance(field, models.OneToOneField) or isinstance(field, models.ForeignKey):
+                    fields.append(f"{field.name} slug")
+
+        with open(os.path.join("report", f"{model.__name__}.csv"), "w") as f:
+            f.write(",".join(fields) + "\n")
+
+            for obj in objects:
+                data = []
+                for field in model._meta.fields:
+                    if field.name in ["id", "user"]:
+                        continue                    
+                    value = getattr(obj, field.name)
+                    if value != 0 and not value:
+                        value = ""
+
+                    if hasattr(value, "slug"):
+                        data.extend(value.name, value.slug)
+                    else:
+                        data.append(str(value))
+
+                f.write(",".join(data) + "\n")
+
+    outfile = io.BytesIO()
+    with zipfile.ZipFile(outfile, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+        for model in model_list:
+            zf.write(os.path.join("report", f"{str(model.__name__)}.csv"))
+    value = outfile.getvalue()
+    shutil.rmtree("report")
+
+    response = HttpResponse(value, content_type="application/zip", headers={"Content-Disposition": 'attachment; filename="report.zip"'})
+    return response
 
 class SignUpView(CreateView):
     template_name = 'registration/signup.html'
