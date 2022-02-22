@@ -6,12 +6,14 @@ from django.utils.crypto import get_random_string
 from django.contrib.auth.models import AbstractUser
 
 # new get_random_string here
+def random_slug_string():
+    return get_random_string(10)
 
 class User(AbstractUser):
     email = models.EmailField("email", blank=False)
 
 class BaseCommonModel(models.Model):
-    slug=models.SlugField(max_length=255, null=False, unique=True, default=get_random_string(10))
+    slug=models.SlugField(max_length=255, null=False, unique=True, default=random_slug_string)
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     name=models.CharField(max_length=255)
     notes=models.CharField(max_length=1024, blank=True)
