@@ -1,7 +1,11 @@
+import copy
 from django.db import models
 from django.urls import reverse
+from django.shortcuts import redirect
 from django.utils.crypto import get_random_string
 from django.contrib.auth.models import AbstractUser
+
+# new get_random_string here
 
 class User(AbstractUser):
     email = models.EmailField("email", blank=False)
@@ -40,6 +44,13 @@ class CommonModel(BaseCommonModel):
 
     class Meta:
         abstract = True
+
+    def copy_item(self):
+        obj = copy.copy(self)
+        obj.pk = None
+        obj.slug = get_random_string(10)
+        obj._state.adding = True
+        obj.save()
 
 class Keyboard(CommonModel):
     size_choices = [

@@ -30,6 +30,7 @@
                 </table>
             </div>
             <a href="{% url 'keycap-update' keycap.slug %}" class="btn btn-primary btn-user btn-block">Update</a>
+            <a href="{{ keycap.copy_object }}" class="btn btn-primary btn-user btn-block">Copy</a>
             <a href="{% url 'keycap-delete' keycap.slug %}" class="btn btn-danger btn-user btn-block">Delete</a>
         </div>
     </div>
