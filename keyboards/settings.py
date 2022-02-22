@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'django-insecure-(zp-30ummq=x8ywxtt2$@mc1l1__ok02r4yjb3fhosey*-7de!'
+#S ECRET_KEY = 'django-insecure-(zp-30ummq=x8ywxtt2$@mc1l1__ok02r4yjb3fhosey*-7de!'
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -147,7 +147,12 @@ LOGIN_REDIRECT_URL = '/app/user/'
 
 LOGOUT_REDIRECT_URL = '/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # TODO: change this
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
 CSRF_COOKIE_SECURE = True
 
@@ -162,3 +167,6 @@ SECURE_HSTS_SECONDS = 1000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 SECURE_HSTS_PRELOAD = True
+
+import django_heroku
+django_heroku.settings(locals())
