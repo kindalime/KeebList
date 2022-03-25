@@ -40,7 +40,7 @@
                             <td>{{ keycap.profile }}</td>
                             <td>{{ keycap.sets }}</td>
                             <td>{{ keycap.material }}</td>
-                            <td>{{ keycap.cost }}</td>
+                            <td>{{ keycap.cost|floatformat:2 }}</td>
                         </tr>
                         {% empty %}
                         <tr>

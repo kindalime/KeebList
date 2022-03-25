@@ -39,7 +39,7 @@
                             <td>{{ switch.name }}</td>
                             <td>{{ switch.type }}</td>
                             <td>{{ switch.bottom_out_force }}</td>
-                            <td>{{ switch.cost }}</td>
+                            <td>{{ switch.cost|floatformat:2 }}</td>
                             <td>{{ switch.manufacturer }}</td>
                         </tr>
                         {% empty %}

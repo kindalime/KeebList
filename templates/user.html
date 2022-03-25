@@ -105,7 +105,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Cost</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_cost }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_cost|floatformat:2 }}</div>
                         </div>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Net Cost</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ net_cost }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ net_cost|floatformat:2 }}</div>
                         </div>
                     </div>
                 </div>

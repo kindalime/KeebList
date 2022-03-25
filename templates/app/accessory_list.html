@@ -36,7 +36,7 @@
                             <td><a href="{{ accessory.get_absolute_url }}" class="btn btn-primary btn-user btn-block">Page</a></td>
                             <td>{{ accessory.name }}</td>
                             <td>{{ accessory.status }}</td>
-                            <td>{{ accessory.cost }}</td>
+                            <td>{{ accessory.cost|floatformat:2 }}</td>
                             <td>{{ accessory.manufacturer }}</td>
                         </tr>
                         {% empty %}
