@@ -36,7 +36,7 @@
                             <td><a href="{{ artisan.get_absolute_url }}" class="btn btn-primary btn-user btn-block">Page</a></td>
                             <td>{{ artisan.name }}</td>
                             <td>{{ artisan.status }}</td>
-                            <td>{{ artisan.cost }}</td>
+                            <td>{{ artisan.cost|floatformat:2 }}</td>
                             <td>{{ artisan.manufacturer }}</td>
                         </tr>
                         {% empty %}

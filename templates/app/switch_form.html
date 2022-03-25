@@ -34,6 +34,12 @@
                                                     </select>
                                                     <p style="color:red; size:100%; padding:0">{{ item.0.errors.as_text }} &nbsp;</p>
                                                 </div>
+                                            {% elif item.3 == "number" %}
+                                                <div class="col-sm-{{item.2}}">
+                                                    <label for="{{item.1}}">{{item.4}}</label>
+                                                    <input type="{{item.3}}" step="any" class="form-control form-control-user" id="{{item.1}}" name="{{item.1}}" value="{{item.0.value}}">
+                                                    <p style="color:red; size:100%; padding:0">{{ item.0.errors.as_text }} &nbsp;</p>
+                                                </div>
                                             {% else %}
                                                 <div class="col-sm-{{item.2}}">
                                                     <label for="{{item.1}}">{{item.4}}</label>
