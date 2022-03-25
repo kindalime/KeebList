@@ -106,10 +106,10 @@ class SwitchForm(CommonForm):
     def sbadmin_format(self):
         data = [
             [["name", 4, "text"], ["status", 4, "select"], ["cost", 4, "number"]],
-            [["sell_price", 4, "number"], ["aftermarket_seller", 4, "text"], ["number", 4, "number"]],            
-            [["switch_type", 4, "select"], ["lube", 4, "text"], ["film", 4, "text"]],
-            [["actuation_force", 4, "number", "Actuation Force (g)"], ["bottom_out_force", 4, "number", "Bottom-Out Force (g)"]],
-            [["spring_length", 6, "text"], ["manufacturer", 6, "text"]],
+            [["sell_price", 4, "number"], ["number", 4, "number"], ["switch_type", 4, "select"]],            
+            [["actuation_force", 4, "number", "Actuation Force (g)"], ["bottom_out_force", 4, "number", "Bottom-Out Force (g)"], ["spring_length", 4, "text"]],
+            [["lube", 6, "text"], ["film", 6, "text"]],
+            [["aftermarket_seller", 6, "text"], ["manufacturer", 6, "text"]],
             [["top_material", 6, "text"], ["bottom_material", 6, "text"]],
             [["stem_material", 6, "text"], ["spring_material", 6, "text"]],
             [["notes", 12, "text"]],
