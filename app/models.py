@@ -67,24 +67,20 @@ class Keyboard(CommonModel):
         ("Other", "Other"),
     ]
 
-    wkl_choices = [
-        ("Y", "Y"),
-        ("N", "N"),
-        ("N/A", "N/A"),
-    ]
-
     size=models.CharField(max_length=255, choices=size_choices)
     color=models.CharField(max_length=255)
     pcb=models.CharField(max_length=255)
-    plate=models.CharField(max_length=255)
-    wkl=models.CharField(max_length=255, choices=wkl_choices)
+    plate=models.CharField(max_length=255, blank=True)
+    layout=models.CharField(max_length=255, blank=True)
+    stabs=models.CharField(max_length=255, blank=True)
     foam=models.CharField(max_length=255, blank=True)
+    accessories=models.CharField(max_length=255, blank=True)
     material=models.CharField(max_length=255, blank=True)
     front_height=models.FloatField(null=True, blank=True)
     typing_angle=models.FloatField(null=True, blank=True)
     mount=models.CharField(max_length=255, blank=True)
     weight=models.CharField(max_length=255, blank=True)
-    knob=models.CharField(max_length=255, blank=True)
+    carrying_case=models.CharField(max_length=255, blank=True)
     extra_pcbs=models.CharField(max_length=255, blank=True)
     extra_plates=models.CharField(max_length=255, blank=True)
     extra_accessories=models.CharField(max_length=255, blank=True)
@@ -115,6 +111,7 @@ class Switch(CommonModel):
         ("Clicky", "Clicky"),
     ]
 
+    number=models.PositiveIntegerField()
     switch_type=models.CharField(max_length=255, choices=switch_type_choices)
     lube=models.CharField(max_length=255, blank=True)
     film=models.CharField(max_length=255, blank=True)
@@ -135,8 +132,8 @@ class Switch(CommonModel):
 
 class Build(BaseCommonModel):
     keyboard=models.OneToOneField(Keyboard, on_delete=models.CASCADE)
-    keycap=models.OneToOneField(Keycap, on_delete=models.CASCADE)
-    switch=models.OneToOneField(Switch, on_delete=models.CASCADE)
+    keycap=models.ForeignKey(Keycap, on_delete=models.CASCADE)
+    switch=models.ForeignKey(Switch, on_delete=models.CASCADE)
 
     @property
     def cost(self):
@@ -148,6 +145,7 @@ class Build(BaseCommonModel):
 class Artisan(CommonModel):
     build=models.ForeignKey(Build, on_delete=models.SET_NULL, blank=True, null=True)
     profile=models.CharField(max_length=255, blank=True)
+    documentation=models.CharField(max_length=255, blank=True)
 
     def get_absolute_url(self):
         return super().get_absolute_url("artisan")

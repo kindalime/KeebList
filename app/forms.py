@@ -44,7 +44,7 @@ class ArtisanForm(CommonForm):
         data = [
             [["name", 4, "text"], ["status", 4, "select"], ["cost", 4, "number"]],
             [["sell_price", 4, "number"], ["build", 4, "select"], ["profile", 4, "text"]],
-            [["aftermarket_seller", 6, "text"], ["manufacturer", 6, "text"]],
+            [["aftermarket_seller", 4, "text"], ["manufacturer", 4, "text"], ["documentation", 4, "text"]],
             [["notes", 12, "text"]],
         ]
         return super().sbadmin_format(Artisan, data)
@@ -71,10 +71,12 @@ class KeyboardForm(CommonForm):
         data = [
             [["name", 4, "text"], ["status", 4, "select"], ["cost", 4, "number"]],
             [["sell_price", 4, "number"], ["aftermarket_seller", 4, "text"], ["manufacturer", 4, "text"]],
-            [["size", 4, "select"], ["wkl", 4, "select", "WKL"], ["color", 4, "text"]],
-            [["pcb", 4, "text", "Current PCB"], ["plate", 4, "text"], ["foam", 4, "text"]],    
-            [["material", 4, "text"], ["mount", 4, "text"], ["weight", 4, "text"]],
-            [["front_height", 4, "number"], ["typing_angle", 4, "number"], ["knob", 4, "text"]],
+            [["size", 4, "select"], ["layout", 4, "text"], ["color", 4, "text"]],
+            [["pcb", 4, "text", "Current PCB"], ["plate", 4, "text"], ["foam", 4, "text"]],
+            [["stabs", 6, "text"], ["mount", 6, "text"]],
+            [["material", 6, "text"], ["weight", 6, "text", "Base/Weight"]],
+            [["accessories", 12, "text"]],
+            [["front_height", 4, "number"], ["typing_angle", 4, "number"], ["carrying_case", 4, "text"]],
             [["extra_pcbs", 6, "text"], ["extra_plates", 6, "text"]],
             [["extra_accessories", 12, "text"]],
             [["notes", 12, "text"]],
@@ -104,9 +106,10 @@ class SwitchForm(CommonForm):
     def sbadmin_format(self):
         data = [
             [["name", 4, "text"], ["status", 4, "select"], ["cost", 4, "number"]],
-            [["sell_price", 4, "number"], ["aftermarket_seller", 4, "text"], ["manufacturer", 4, "text"]],            
+            [["sell_price", 4, "number"], ["aftermarket_seller", 4, "text"], ["number", 4, "number"]],            
             [["switch_type", 4, "select"], ["lube", 4, "text"], ["film", 4, "text"]],
-            [["actuation_force", 4, "number", "Actuation Force (g)"], ["bottom_out_force", 4, "number", "Bottom-Out Force (g)"], ["spring_length", 4, "text"]],
+            [["actuation_force", 4, "number", "Actuation Force (g)"], ["bottom_out_force", 4, "number", "Bottom-Out Force (g)"]],
+            [["spring_length", 6, "text"], ["manufacturer", 6, "text"]],
             [["top_material", 6, "text"], ["bottom_material", 6, "text"]],
             [["stem_material", 6, "text"], ["spring_material", 6, "text"]],
             [["notes", 12, "text"]],
