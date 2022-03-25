@@ -39,7 +39,7 @@ class CommonModel(BaseCommonModel):
     status=models.CharField(max_length=255, choices=status_choices)
     cost=models.FloatField()
     aftermarket_seller=models.CharField(max_length=255, blank=True)
-    manufacturer=models.CharField(max_length=255)
+    manufacturer=models.CharField(max_length=255, blank=True)
     sell_price=models.FloatField(null=True, blank=True)
 
     class Meta:
@@ -97,7 +97,7 @@ class Keycap(CommonModel):
     profile=models.CharField(max_length=255)
     sets=models.CharField(max_length=255)
     material=models.CharField(max_length=255)
-    production=models.CharField(max_length=255, choices=production_choices)
+    production=models.CharField(max_length=255, choices=production_choices, blank=True)
 
     def get_absolute_url(self):
         return super().get_absolute_url("keycap")
