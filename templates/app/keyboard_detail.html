@@ -35,7 +35,7 @@
                 </table>
             </div>
             <a href="{% url 'keyboard-update' keyboard.slug %}" class="btn btn-primary btn-user btn-block">Update</a>
-            <a href="{{ keyboard.copy_object }}" class="btn btn-primary btn-user btn-block">Copy</a>
+            <a href="{{ keyboard.get_copy_url }}" class="btn btn-primary btn-user btn-block">Copy</a>
             <a href="{% url 'keyboard-delete' keyboard.slug %}" class="btn btn-danger btn-user btn-block">Delete</a>
         </div>
     </div>

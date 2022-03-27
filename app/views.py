@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import *
 from django.views.generic import *
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 from .forms import *
 import zipfile
@@ -107,6 +107,21 @@ def report(request):
 
     response = HttpResponse(value, content_type="application/zip", headers={"Content-Disposition": 'attachment; filename="report.zip"'})
     return response
+
+def duplicate_object(request, slug):
+    models = [Artisan, Accessory, Keyboard, Keycap, Switch]
+    for model in models:
+        items = list(model.objects.filter(slug=slug))
+        if len(items) > 0:
+            item = items[0]
+            break
+    
+    obj = copy.copy(item)
+    obj.pk = None
+    obj.slug = random_slug_string()
+    obj._state.adding = True
+    obj.save()
+    return HttpResponseRedirect(obj.get_absolute_url())
 
 class SignUpView(CreateView):
     template_name = 'registration/signup.html'
