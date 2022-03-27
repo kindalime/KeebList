@@ -9,6 +9,9 @@ from django.contrib.auth.models import AbstractUser
 def random_slug_string():
     return get_random_string(10)
 
+def random_slug_string():
+    return get_random_string(10)
+
 class User(AbstractUser):
     email = models.EmailField("email", blank=False)
 
@@ -44,15 +47,11 @@ class CommonModel(BaseCommonModel):
     manufacturer=models.CharField(max_length=255, blank=True)
     sell_price=models.FloatField(null=True, blank=True)
 
+    def get_copy_url(self, model):
+        return reverse(f'{model}-duplicate_object', kwargs={"slug": self.slug})
+
     class Meta:
         abstract = True
-
-    def copy_item(self):
-        obj = copy.copy(self)
-        obj.pk = None
-        obj.slug = get_random_string(10)
-        obj._state.adding = True
-        obj.save()
 
 class Keyboard(CommonModel):
     size_choices = [
@@ -88,6 +87,10 @@ class Keyboard(CommonModel):
     def get_absolute_url(self):
         return super().get_absolute_url("keyboard")
 
+    def get_copy_url(self):
+        return super().get_copy_url("keyboard")
+
+
 class Keycap(CommonModel):
     production_choices = [
         ("Doubleshot", "Doubleshot"),
@@ -103,6 +106,10 @@ class Keycap(CommonModel):
 
     def get_absolute_url(self):
         return super().get_absolute_url("keycap")
+
+    def get_copy_url(self):
+        return super().get_copy_url("keycap")
+
 
 class Switch(CommonModel):
     switch_type_choices = [
@@ -130,6 +137,10 @@ class Switch(CommonModel):
     def get_absolute_url(self):
         return super().get_absolute_url("switch")
 
+    def get_copy_url(self):
+        return super().get_copy_url("switch")
+
+
 class Build(BaseCommonModel):
     keyboard=models.OneToOneField(Keyboard, on_delete=models.CASCADE)
     keycap=models.ForeignKey(Keycap, on_delete=models.CASCADE)
@@ -142,6 +153,7 @@ class Build(BaseCommonModel):
     def get_absolute_url(self):
         return super().get_absolute_url("build")
 
+
 class Artisan(CommonModel):
     build=models.ForeignKey(Build, on_delete=models.SET_NULL, blank=True, null=True)
     profile=models.CharField(max_length=255, blank=True)
@@ -150,6 +162,10 @@ class Artisan(CommonModel):
     def get_absolute_url(self):
         return super().get_absolute_url("artisan")
 
+    def get_copy_url(self):
+        return super().get_copy_url("artisan")
+
+
 class Accessory(CommonModel):
     class Meta:
         ordering = ['-name']
@@ -157,3 +173,6 @@ class Accessory(CommonModel):
 
     def get_absolute_url(self):
         return super().get_absolute_url("accessory")
+
+    def get_copy_url(self):
+        return super().get_copy_url("accessory")

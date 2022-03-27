@@ -35,7 +35,7 @@
                 </table>
             </div>
             <a href="{% url 'switch-update' switch.slug %}" class="btn btn-primary btn-user btn-block">Update</a>
-            <a href="{{ switch.copy_object }}" class="btn btn-primary btn-user btn-block">Copy</a>
+            <a href="{{ switch.get_copy_url }}" class="btn btn-primary btn-user btn-block">Copy</a>
             <a href="{% url 'switch-delete' switch.slug %}" class="btn btn-danger btn-user btn-block">Delete</a>
         </div>
     </div>

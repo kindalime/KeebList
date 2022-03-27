@@ -14,6 +14,7 @@ urlpatterns += [
     path('accessory/create/', AccessoryCreateView.as_view(), name='accessory-create'),
     path('accessory/<slug:slug>/update/', AccessoryUpdateView.as_view(), name='accessory-update'),
     path('accessory/<slug:slug>/delete/', AccessoryDeleteView.as_view(), name='accessory-delete'),
+    path('accessory/<slug:slug>/duplicate_object/', duplicate_object, name="accessory-duplicate_object")
 ]
 
 urlpatterns += [
@@ -22,6 +23,7 @@ urlpatterns += [
     path('artisan/create/', ArtisanCreateView.as_view(), name='artisan-create'),
     path('artisan/<slug:slug>/update/', ArtisanUpdateView.as_view(), name='artisan-update'),
     path('artisan/<slug:slug>/delete/', ArtisanDeleteView.as_view(), name='artisan-delete'),
+    path('artisan/<slug:slug>/duplicate_object/', duplicate_object, name="artisan-duplicate_object")
 ]
 
 urlpatterns += [
@@ -38,6 +40,7 @@ urlpatterns += [
     path('keycap/create/', KeycapCreateView.as_view(), name='keycap-create'),
     path('keycap/<slug:slug>/update/', KeycapUpdateView.as_view(), name='keycap-update'),
     path('keycap/<slug:slug>/delete/', KeycapDeleteView.as_view(), name='keycap-delete'),
+    path('keycap/<slug:slug>/duplicate_object/', duplicate_object, name="keycap-duplicate_object")
 ]
 
 urlpatterns += [
@@ -46,6 +49,7 @@ urlpatterns += [
     path('keyboard/create/', KeyboardCreateView.as_view(), name='keyboard-create'),
     path('keyboard/<slug:slug>/update/', KeyboardUpdateView.as_view(), name='keyboard-update'),
     path('keyboard/<slug:slug>/delete/', KeyboardDeleteView.as_view(), name='keyboard-delete'),
+    path('keyboard/<slug:slug>/duplicate_object/', duplicate_object, name="keyboard-duplicate_object")
 ]
 
 urlpatterns += [
@@ -54,4 +58,5 @@ urlpatterns += [
     path('switch/create/', SwitchCreateView.as_view(), name='switch-create'),
     path('switch/<slug:slug>/update/', SwitchUpdateView.as_view(), name='switch-update'),
     path('switch/<slug:slug>/delete/', SwitchDeleteView.as_view(), name='switch-delete'),
+    path('switch/<slug:slug>/duplicate_object/', duplicate_object, name="switch-duplicate_object")
 ]
