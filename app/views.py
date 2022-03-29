@@ -29,6 +29,17 @@ def get_costs(user=None):
             cost += cost_model
         if gain_model:
             gain += gain_model
+
+    if user:
+        cost_model = model.objects.filter(user=user).aggregate(Sum('stabilizer_cost'))['stabilizer_cost__sum']
+    else:
+        cost_model = model.objects.aggregate(Sum('stabilizer_cost'))['stabilizer_cost__sum']
+
+    if cost_model:
+        cost += cost_model
+    if gain_model:
+        gain += gain_model
+
     return cost, cost - gain
 
 def index(request):
