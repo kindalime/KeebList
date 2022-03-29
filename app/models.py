@@ -89,6 +89,10 @@ class Keyboard(CommonModel):
     def get_copy_url(self):
         return super().get_copy_url("keyboard")
 
+    @property
+    def full_cost(self):
+        return self.cost + self.stabilizer_cost
+
 
 class Keycap(CommonModel):
     production_choices = [
