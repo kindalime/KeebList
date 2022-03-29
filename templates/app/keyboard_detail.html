@@ -19,7 +19,7 @@
                                 <th>{{ item.0 }}</th>
                                 <td><a href="{{ item.1.get_absolute_url }}">{{ item.1.name }}</a></td>
                             </tr>
-                            {% elif item.0 == "Cost" or item.0 in "Sell Price" %}
+                            {% elif item.0 == "Cost" or item.0 in "Sell Price" or item.0 == "Stabilizer Cost"%}
                             <tr>
                                 <th>{{ item.0 }}</th>
                                 <td>{{ item.1|floatformat:2 }}</td>
