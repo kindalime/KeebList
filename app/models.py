@@ -93,7 +93,10 @@ class Keyboard(CommonModel):
 
     @property
     def full_cost(self):
-        return self.cost + self.stabilizer_cost
+        if self.stabilizer_cost:
+            return self.cost + self.stabilizer_cost
+        else:
+            return self.cost
 
 
 class Keycap(CommonModel):
