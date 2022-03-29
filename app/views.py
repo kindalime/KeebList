@@ -31,9 +31,9 @@ def get_costs(user=None):
             gain += gain_model
 
     if user:
-        cost_model = model.objects.filter(user=user).aggregate(Sum('stabilizer_cost'))['stabilizer_cost__sum']
+        cost_model = Keyboard.objects.filter(user=user).aggregate(Sum('stabilizer_cost'))['stabilizer_cost__sum']
     else:
-        cost_model = model.objects.aggregate(Sum('stabilizer_cost'))['stabilizer_cost__sum']
+        cost_model = Keyboard.objects.aggregate(Sum('stabilizer_cost'))['stabilizer_cost__sum']
 
     if cost_model:
         cost += cost_model
@@ -160,7 +160,7 @@ class CommonDetailView(CorrectUserMixin, DetailView):
             if field.name in ["id", "user", "slug"]:
                 continue
 
-            name = field.name.replace("_", " ").title()
+            name = field.name.replace("_", " ").title().replace("Pcb", "PCB")
             value = getattr(obj, field.name)
             if value != 0 and not value:
                 value = ""

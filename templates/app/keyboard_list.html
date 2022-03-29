@@ -43,7 +43,7 @@
                             <td>{{ keyboard.color }}</td>
                             <td>{{ keyboard.pcb }}</td>
                             <td>{{ keyboard.plate }}</td>
-                            <td>{{ keyboard.cost + keyboard.stabilizer_cost|floatformat:2 }}</td>
+                            <td>{{ keyboard.full_cost|floatformat:2 }}</td>
                         </tr>
                         {% empty %}
                         <tr>
