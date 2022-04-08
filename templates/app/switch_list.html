@@ -16,8 +16,11 @@
                         <tr>
                             <th>Page</th>
                             <th>Name</th>
+                            <th>Number</th>
                             <th>Type</th>
                             <th>Bottom-Out Force</th>
+                            <th>Lube</th>
+                            <th>Film</th>
                             <th>Cost</th>
                             <th>Manufacturer</th>
                         </tr>
@@ -26,10 +29,12 @@
                         <tr>
                             <th>Page</th>
                             <th>Name</th>
+                            <th>Number</th>
                             <th>Type</th>
                             <th>Bottom-Out Force</th>
+                            <th>Lube</th>
+                            <th>Film</th>
                             <th>Cost</th>
-                            <th>Manufacturer</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -37,13 +42,18 @@
                         <tr>
                             <td><a href="{{ switch.get_absolute_url }}" class="btn btn-primary btn-user btn-block">Page</a></td>
                             <td>{{ switch.name }}</td>
+                            <td>{{ switch.number }}</td>
                             <td>{{ switch.switch_type }}</td>
                             <td>{{ switch.bottom_out_force }}</td>
+                            <td>{{ switch.lube }}</td>
+                            <td>{{ switch.film }}</td>
                             <td>{{ switch.cost|floatformat:2 }}</td>
-                            <td>{{ switch.manufacturer }}</td>
                         </tr>
                         {% empty %}
                         <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>

@@ -16,6 +16,7 @@
                         <tr>
                             <th>Page</th>
                             <th>Name</th>
+                            <th>Status</th>
                             <th>Profile</th>
                             <th>Sets</th>
                             <th>Material</th>
@@ -26,6 +27,7 @@
                         <tr>
                             <th>Page</th>
                             <th>Name</th>
+                            <th>Status</th>
                             <th>Profile</th>
                             <th>Sets</th>
                             <th>Material</th>
@@ -37,6 +39,7 @@
                         <tr>
                             <td><a href="{{ keycap.get_absolute_url }}" class="btn btn-primary btn-user btn-block">Page</a></td>
                             <td>{{ keycap.name }}</td>
+                            <td>{{ keycap.status }}</td>
                             <td>{{ keycap.profile }}</td>
                             <td>{{ keycap.sets }}</td>
                             <td>{{ keycap.material }}</td>
@@ -44,6 +47,8 @@
                         </tr>
                         {% empty %}
                         <tr>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
