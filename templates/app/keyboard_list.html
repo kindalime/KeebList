@@ -18,6 +18,8 @@
                             <th>Name</th>
                             <th>Size</th>
                             <th>Color</th>
+                            <th>Mount</th>
+                            <th>Layout</th>
                             <th>PCB</th>
                             <th>Plate</th>
                             <th>Cost</th>
@@ -29,6 +31,8 @@
                             <th>Name</th>
                             <th>Size</th>
                             <th>Color</th>
+                            <th>Mount</th>
+                            <th>Layout</th>
                             <th>PCB</th>
                             <th>Plate</th>
                             <th>Cost</th>
@@ -41,12 +45,18 @@
                             <td>{{ keyboard.name }}</td>
                             <td>{{ keyboard.size }}</td>
                             <td>{{ keyboard.color }}</td>
+                            <td>{{ keyboard.mount }}</td>
+                            <td>{{ keyboard.layout }}</td>
                             <td>{{ keyboard.pcb }}</td>
                             <td>{{ keyboard.plate }}</td>
                             <td>{{ keyboard.full_cost|floatformat:2 }}</td>
                         </tr>
                         {% empty %}
                         <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
