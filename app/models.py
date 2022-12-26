@@ -12,6 +12,9 @@ def random_slug_string():
 def random_slug_string():
     return get_random_string(10)
 
+def random_slug_string():
+    return get_random_string(10)
+
 class User(AbstractUser):
     email = models.EmailField("email", blank=False)
 
